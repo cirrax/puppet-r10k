@@ -1,0 +1,47 @@
+# post-receive hook to trigger r10k over ssh on updates to puppet control repo
+
+# Set SSHTARGET in ~/.config/puppet-update to eg:
+#   root@puppet.example.com
+
+# Caveat: If you push a branch deletion and an updated Puppetfile in the same
+# push command, the updates to the Puppetfile will not be deployed. You'll have
+# to run manually or make another change to the Puppetfile.
+
+
+SSHTARGET=$(git config hooks.r10ktargets)
+
+update() {
+  for TARGET in $SSHTARGET; do
+    ssh $TARGET -- --verbose $@
+    if [ $? -ne 0 ]; then
+      echo "WARNING: Update to $TARGET had errors: puppet may not be completely updated" >&2
+      exit 1
+    fi
+  done
+}
+
+while read oldref newref refname
+do
+  refname=$(basename $refname)
+  updateargs=
+  if echo ${newref} | egrep -vq '[^0]'
+  then
+    echo "Branch $refname is being deleted, updating all to trigger cleanup"
+    update all
+    break
+  fi
+
+  echo oldref ${oldref}
+  echo newef ${newref}
+  # if oldref is 0, we have a new branch
+  if echo ${oldref} | egrep -vq '[^0]' ; then
+     updateargs="--puppetfile"
+  else   # not a new branch, only run if Puppetfile changed
+     echo no new branch
+     if git diff --name-only ${oldref}..${newref} | grep -q Puppetfile ;  then
+       updateargs="--puppetfile"
+     fi
+  fi
+  update ${refname} ${updateargs}
+done
+
