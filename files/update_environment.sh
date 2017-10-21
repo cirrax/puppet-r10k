@@ -24,5 +24,7 @@ if [[ $ENV == 'all' ]]; then
    ENV=''
 fi
 
-(cd /etc/puppet; r10k -v --config=r10k.yaml deploy environment $ENV $ENV2)
+(cd /etc/puppet; r10k --config=r10k.yaml deploy --verbose=debug environment $ENV $ENV2 2>&1 |grep -E '(INFO|Updating)')
 
+
+#r10k --config=r10k.yaml deploy --verbose=debug module r10k 2>&1 |grep -E '(INFO|Updating)'
