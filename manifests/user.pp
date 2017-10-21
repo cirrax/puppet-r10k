@@ -44,4 +44,11 @@ class r10k::user (
     mode   => '0755',
     source => 'puppet:///modules/r10k/update_environment.sh',
   }
+
+  file {"${home}/update_module.sh":
+    owner  => $user,
+    group  => $user,
+    mode   => '0755',
+    source => 'puppet:///modules/r10k/update_module.sh',
+  }
 }
