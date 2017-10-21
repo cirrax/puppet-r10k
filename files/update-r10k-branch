@@ -9,6 +9,7 @@
 
 
 SSHTARGET=$(git config hooks.r10ktargets)
+MODULE=$(git config hooks.r10kmodule)
 
 update() {
   for TARGET in $SSHTARGET; do
@@ -20,28 +21,42 @@ update() {
   done
 }
 
-while read oldref newref refname
-do
-  refname=$(basename $refname)
-  updateargs=
-  if echo ${newref} | egrep -vq '[^0]'
-  then
-    echo "Branch $refname is being deleted, updating all to trigger cleanup"
-    update all
-    break
-  fi
-
-  echo oldref ${oldref}
-  echo newef ${newref}
-  # if oldref is 0, we have a new branch
-  if echo ${oldref} | egrep -vq '[^0]' ; then
-     updateargs="--puppetfile"
-  else   # not a new branch, only run if Puppetfile changed
-     echo no new branch
-     if git diff --name-only ${oldref}..${newref} | grep -q Puppetfile ;  then
+# update the control repository 
+control_repository() {
+  while read oldref newref refname
+  do
+    refname=$(basename $refname)
+    updateargs=
+    if echo ${newref} | egrep -vq '[^0]'
+    then
+      echo "Branch $refname is being deleted, updating all to trigger cleanup"
+      update all
+      break
+    fi
+  
+    echo oldref ${oldref}
+    echo newef ${newref}
+    # if oldref is 0, we have a new branch
+    if echo ${oldref} | egrep -vq '[^0]' ; then
        updateargs="--puppetfile"
-     fi
-  fi
-  update ${refname} ${updateargs}
-done
+    else   # not a new branch, only run if Puppetfile changed
+       echo no new branch
+       if git diff --name-only ${oldref}..${newref} | grep -q Puppetfile ;  then
+         updateargs="--puppetfile"
+       fi
+    fi
+    update ${refname} ${updateargs}
+  done
+}
+
+# update a modules repository
+module_repository() {
+  update 'MODULE' $MODULE
+}
+
+if [ -z "$MODULE" ] ; then
+  control_repository
+else
+  module_repository  
+fi
 
