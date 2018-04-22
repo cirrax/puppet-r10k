@@ -31,6 +31,11 @@ class r10k::user (
     length  => 4096,
     require => File["${home}/.ssh"],
   }
+  ssh::key {"${home}/.ssh/id_ed25519":
+    type    => 'ed25519',
+    user    => $user,
+    require => File["${home}/.ssh"],
+  }
 
   #keys which are allowed to login:
   ssh::authorized_key{'allowed keys for r10k update':
