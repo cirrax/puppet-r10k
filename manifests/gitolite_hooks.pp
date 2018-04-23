@@ -31,10 +31,9 @@ class r10k::gitolite_hooks (
 
   if $hook_name != '' {
     file { "${hook_path}/${hook_name}":
-      owner   => $gitolite_user,
-      mode    => '0755',
-      source  => 'puppet:///modules/r10k/update-r10k-branch',
-      require => File[$hook_path],
+      owner  => $gitolite_user,
+      mode   => '0755',
+      source => 'puppet:///modules/r10k/update-r10k-branch',
     }
   }
 
@@ -44,7 +43,6 @@ class r10k::gitolite_hooks (
       owner   => $gitolite_user,
       mode    => '0755',
       content => template('r10k/gitolite/multihook_r10k_email.erb'),
-      require => File[$hook_path],
     }
   }
 }
