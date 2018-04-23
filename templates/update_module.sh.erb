@@ -7,4 +7,4 @@ if [[ ! "$MODULE" =~ ^[A-Za-z0-9_]+$ ]]; then
    exit 1
 fi
 
-(cd /etc/puppet; r10k --config=r10k.yaml deploy --verbose=debug module $MODULE 2>&1 |grep -E '(INFO|Updating)')
+(cd <%= @configdir %>; r10k --config=r10k.yaml deploy --verbose=debug module $MODULE 2>&1 |grep -E '(INFO|Updating)')
