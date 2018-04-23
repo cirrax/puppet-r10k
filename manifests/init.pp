@@ -63,9 +63,24 @@ class r10k (
   }
 
   file { "${configdir}/r10k.yaml":
-    owner => 'root',
-    group => 'root',
-    mode  => '0644',
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
     content => template('r10k/r10k.yaml.erb'),
+  }
+
+  # scipts to execute to update environments (usally through hook)
+  file {"${home}/update_environment.sh":
+    owner   => $user,
+    group   => $user,
+    mode    => '0755',
+    content => template('r10k/update_environment.sh.erb'),
+  }
+
+  file {"${home}/update_module.sh":
+    owner   => $user,
+    group   => $user,
+    mode    => '0755',
+    content => template('r10k/update_module.sh.erb'),
   }
 }

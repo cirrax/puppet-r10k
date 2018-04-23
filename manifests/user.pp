@@ -52,18 +52,4 @@ class r10k::user (
     keys     => $allowed_keys,
   }
 
-  # scipts to execute by gitolite hook
-  file {"${home}/update_environment.sh":
-    owner   => $user,
-    group   => $user,
-    mode    => '0755',
-    content => template('r10k/update_environment.sh.erb'),
-  }
-
-  file {"${home}/update_module.sh":
-    owner  => $user,
-    group  => $user,
-    mode   => '0755',
-    content => template('r10k/update_module.sh.erb'),
-  }
 }
