@@ -12,9 +12,9 @@
 #   normaly this is the key used by git hooks.
 #
 class r10k::user (
-  $user         = 'r10k',
-  $home         = '/var/lib/r10k',
-  $allowed_keys = [],
+  String $user         = 'r10k',
+  String $home         = '/var/lib/r10k',
+  Array  $allowed_keys = [],
 ){
 
   user{ $user:
