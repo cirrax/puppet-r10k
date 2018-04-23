@@ -1,8 +1,0 @@
-#!/bin/bash
-#
-# This is a multihook, that runs r10k update
-# and sending email
-#
-P='/var/lib/gitolite/scripts'
-pee $P/update-r10k-branch $P/post-receive-email
-

@@ -1,0 +1,7 @@
+#!/bin/bash
+#
+# This is a multihook, that runs r10k update
+# and sending email
+#
+P='<%= @hook_path %>'
+pee $P/<%= @hook_name %> <%= @prefixed_multihook_scripts.join(' ') %>
