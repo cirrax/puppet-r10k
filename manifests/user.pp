@@ -43,9 +43,9 @@ class r10k::user (
   }
 
   #keys which are allowed to login:
-  ssh::authorized_key{'allowed keys for r10k update':
-    username => $user,
-    keys     => $allowed_keys,
+  class {'r10k::authorized_key':
+    username    => $user,
+    keys        => $allowed_keys,
+    home        => $home,
   }
-
 }
