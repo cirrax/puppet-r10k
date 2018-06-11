@@ -35,15 +35,11 @@ class r10k::user (
   }
 
   #SSH Key to fetch data from git
-  ssh::key {"${home}/.ssh/id_rsa":
-    user    => $user,
-    length  => 4096,
-    require => File["${home}/.ssh"],
-  }
-  ssh::key {"${home}/.ssh/id_ed25519":
-    type    => 'ed25519',
-    user    => $user,
-    require => File["${home}/.ssh"],
+  class {'r10k::ssh_key':
+    filename => "${home}/.ssh/id_ed25519",
+    type     => 'ed25519',
+    user     => $user,
+    require  => File["${home}/.ssh"],
   }
 
   #keys which are allowed to login:
