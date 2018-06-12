@@ -20,6 +20,9 @@
 # $gitolite_user:
 #   gitolite user to be owner of the scripts
 #   defaults to 'gitolite'
+# $packages:
+#   additional packages needed for the hooks
+#   defaults to ['moreutils'] which contains pee needed for multihook
 #
 class r10k::gitolite_hooks (
   String $hook_path         = '/var/lib/gitolite/scripts',
@@ -27,7 +30,10 @@ class r10k::gitolite_hooks (
   String $multihook_name    = 'multihook_r10k_email',
   Array  $multihook_scripts = [],
   String $gitolite_user     = 'gitolite',
+  Array  $packages          = ['moreutils'],
 ){
+
+  ensure_packages($packages)
 
   if $hook_name != '' {
     file { "${hook_path}/${hook_name}":
