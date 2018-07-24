@@ -1,4 +1,7 @@
 #
+# Main r10k class
+#
+#
 # Parameters:
 #  $configdir:
 #    where the configfile should be put
