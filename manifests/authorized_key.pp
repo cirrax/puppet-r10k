@@ -20,7 +20,7 @@
 
 class r10k::authorized_key (
   $username,
-  $home,      
+  $home,
   $keys        = [],
   $destination = '',
   $owner       = $username,
