@@ -26,7 +26,7 @@ class r10k::user (
     shell      => '/bin/bash',
   }
 
-  file { [$home, "${home}/.ssh"] :
+  file { "${home}/.ssh" :
     ensure  => directory,
     owner   => $user,
     group   => $user,

@@ -38,7 +38,7 @@ class r10k::authorized_key (
       group   => $group,
       mode    => $mode,
       content => join($_keys, "\n"),
-      require => File["${home}/.ssh/"],
+      require => File["${home}/.ssh"],
     }
   } else {
     file { $destination:

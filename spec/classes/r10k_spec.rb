@@ -12,7 +12,7 @@ describe 'r10k' do
        :forge        => {},
        :user         => 'r10k',
        :home         => '/var/lib/r10k',
-       :ensure_user  => false, # defaults to true but needs compile fix
+       :ensure_user  => true,
        :allowed_keys => [],
      }
   end
@@ -41,8 +41,14 @@ describe 'r10k' do
       .with_group( params[:user] )
       .with_mode( '0755' )
     }
+  end
 
-
+  shared_examples 'r10k user' do
+    it { is_expected.to contain_class( 'r10k::user' )
+      .with_user(params[:user])
+      .with_home(params[:home])
+      .with_allowed_keys(params[:allowed_keys])
+    }
   end
 
   context 'with defaults' do
@@ -50,6 +56,7 @@ describe 'r10k' do
       default_params
     end
     it_behaves_like 'r10k shared examples'
+
   end
 
   context 'with non default configdir' do
@@ -59,6 +66,7 @@ describe 'r10k' do
       )
     end
     it_behaves_like 'r10k shared examples'
+    it_behaves_like 'r10k user'
   end
 
   context 'with non default user' do
@@ -66,8 +74,21 @@ describe 'r10k' do
       default_params.merge(
         :user => 'r42k',
 	:home => '/somewhere',
+        :allowed_keys => ['key'],
       )
     end
     it_behaves_like 'r10k shared examples'
+    it_behaves_like 'r10k user'
+  end
+
+  context 'with ensure_user false' do
+    let :params do
+      default_params.merge(
+        :ensure_user => false,
+      )
+    end
+    it_behaves_like 'r10k shared examples'
+    it { is_expected.to_not contain_class( 'r10k::user' )
+    }
   end
 end
