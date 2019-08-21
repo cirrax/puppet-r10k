@@ -2,14 +2,16 @@
   "name": "cirrax-r10k",
   "version": "1.0.1",
   "author": "Cirrax GmbH",
-  "license": "GPL-3.0",
   "summary": "A module to configure r10k",
+  "license": "GPL-3.0",
   "source": "https://github.com/cirrax/puppet-r10k",
   "project_page": "https://github.com/cirrax/puppet-r10k",
   "issues_url": "https://github.com/cirrax/puppet-r10k/issues",
-  "tags": [
-    "r10k",
-    "puppet"
+  "dependencies": [
+    {
+      "name": "puppetlabs/stdlib",
+      "version_requirement": ">= 3.2.0 < 6.0.0"
+    }
   ],
   "operatingsystem_support": [
     {
@@ -29,10 +31,11 @@
       "version_requirement": ">=4.0.0 < 7.0.0"
     }
   ],
-  "dependencies": [
-    {
-      "name": "puppetlabs/stdlib",
-      "version_requirement": ">= 3.2.0 < 6.0.0"
-    }
-  ]
+  "tags": [
+    "r10k",
+    "puppet"
+  ],
+  "pdk-version": "1.12.0",
+  "template-url": "pdk-default#1.12.0",
+  "template-ref": "1.12.0-0-g55d9ae2"
 }
