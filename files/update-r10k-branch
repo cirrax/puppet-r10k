@@ -35,7 +35,7 @@ control_repository() {
     fi
   
     echo oldref ${oldref}
-    echo newef ${newref}
+    echo newref ${newref}
     # if oldref is 0, we have a new branch
     if echo ${oldref} | egrep -vq '[^0]' ; then
        updateargs="--puppetfile"
