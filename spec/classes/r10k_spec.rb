@@ -56,48 +56,54 @@ describe 'r10k' do
     }
   end
 
-  context 'with defaults' do
-    let :params do
-      default_params
+  on_supported_os.each do |os, os_facts|
+    context "on #{os}" do
+      let(:facts) { os_facts }
+
+      context 'with defaults' do
+        let :params do
+          default_params
+        end
+
+        it_behaves_like 'r10k shared examples'
+      end
+
+      context 'with non default configdir' do
+        let :params do
+          default_params.merge(
+            configdir: '/somewhere_else',
+          )
+        end
+
+        it_behaves_like 'r10k shared examples'
+        it_behaves_like 'r10k user'
+      end
+
+      context 'with non default user' do
+        let :params do
+          default_params.merge(
+            user: 'r42k',
+            home: '/somewhere',
+            allowed_keys: ['key'],
+          )
+        end
+
+        it_behaves_like 'r10k shared examples'
+        it_behaves_like 'r10k user'
+      end
+
+      context 'with ensure_user false' do
+        let :params do
+          default_params.merge(
+            ensure_user: false,
+          )
+        end
+
+        it_behaves_like 'r10k shared examples'
+        it {
+          is_expected.not_to contain_class('r10k::user')
+        }
+      end
     end
-
-    it_behaves_like 'r10k shared examples'
-  end
-
-  context 'with non default configdir' do
-    let :params do
-      default_params.merge(
-        configdir: '/somewhere_else',
-      )
-    end
-
-    it_behaves_like 'r10k shared examples'
-    it_behaves_like 'r10k user'
-  end
-
-  context 'with non default user' do
-    let :params do
-      default_params.merge(
-        user: 'r42k',
-        home: '/somewhere',
-        allowed_keys: ['key'],
-      )
-    end
-
-    it_behaves_like 'r10k shared examples'
-    it_behaves_like 'r10k user'
-  end
-
-  context 'with ensure_user false' do
-    let :params do
-      default_params.merge(
-        ensure_user: false,
-      )
-    end
-
-    it_behaves_like 'r10k shared examples'
-    it {
-      is_expected.not_to contain_class('r10k::user')
-    }
   end
 end

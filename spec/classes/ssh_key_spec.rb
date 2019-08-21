@@ -23,26 +23,32 @@ describe 'r10k::ssh_key' do
     }
   end
 
-  context 'with defaults' do
-    let :params do
-      default_params
+  on_supported_os.each do |os, os_facts|
+    context "on #{os}" do
+      let(:facts) { os_facts }
+
+      context 'with defaults' do
+        let :params do
+          default_params
+        end
+
+        it_behaves_like 'r10k::ssh_key shared examples'
+      end
+
+      context 'with non defaults' do
+        let :params do
+          default_params.merge(
+            filename: '/tmp/another_location',
+            type: 'ecdsa',
+            length: 4000,
+            password: 'password',
+            comment: 'somecomment',
+            user: 'r10k',
+          )
+        end
+
+        it_behaves_like 'r10k::ssh_key shared examples'
+      end
     end
-
-    it_behaves_like 'r10k::ssh_key shared examples'
-  end
-
-  context 'with non defaults' do
-    let :params do
-      default_params.merge(
-        filename: '/tmp/another_location',
-        type: 'ecdsa',
-        length: 4000,
-        password: 'password',
-        comment: 'somecomment',
-        user: 'r10k',
-      )
-    end
-
-    it_behaves_like 'r10k::ssh_key shared examples'
   end
 end

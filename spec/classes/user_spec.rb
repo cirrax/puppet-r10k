@@ -46,19 +46,25 @@ describe 'r10k::user' do
     }
   end
 
-  context 'with defaults' do
-    let :params do
-      default_params
+  on_supported_os.each do |os, os_facts|
+    context "on #{os}" do
+      let(:facts) { os_facts }
+
+      context 'with defaults' do
+        let :params do
+          default_params
+        end
+
+        it_behaves_like 'r10k::user shared examples'
+      end
+
+      context 'with non defaults' do
+        let :params do
+          default_params.merge(user: 'r42k', home: '/tmp/blah', allowed_keys: ['blah', 'fasel'])
+        end
+
+        it_behaves_like 'r10k::user shared examples'
+      end
     end
-
-    it_behaves_like 'r10k::user shared examples'
-  end
-
-  context 'with non defaults' do
-    let :params do
-      default_params.merge(user: 'r42k', home: '/tmp/blah', allowed_keys: ['blah', 'fasel'])
-    end
-
-    it_behaves_like 'r10k::user shared examples'
   end
 end

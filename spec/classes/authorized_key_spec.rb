@@ -24,35 +24,40 @@ describe 'r10k::authorized_key' do
         .with_mode(params[:mode])
     }
   end
+  on_supported_os.each do |os, os_facts|
+    context "on #{os}" do
+      let(:facts) { os_facts }
 
-  context 'with defaults' do
-    let(:pre_condition) { "file{'/var/lib/r10k/.ssh': }" }
-    let :params do
-      default_params
+      context 'with defaults' do
+        let(:pre_condition) { "file{'/var/lib/r10k/.ssh': }" }
+        let :params do
+          default_params
+        end
+
+        it_behaves_like 'r10k::authorized_key shared example'
+      end
+
+      context 'with non defaults' do
+        let(:pre_condition) { "file{'/var/lib/r10k/.ssh': }" }
+        let :params do
+          default_params.merge(owner: 'r42k', group: 'r43k', mode: '0777')
+        end
+
+        it_behaves_like 'r10k::authorized_key shared example'
+      end
+
+      context 'with special destination' do
+        let :params do
+          default_params.merge(destination: '/tmp/desti')
+        end
+
+        it {
+          is_expected.to contain_file('/tmp/desti')
+            .with_owner(params[:owner])
+            .with_group(params[:group])
+            .with_mode(params[:mode])
+        }
+      end
     end
-
-    it_behaves_like 'r10k::authorized_key shared example'
-  end
-
-  context 'with non defaults' do
-    let(:pre_condition) { "file{'/var/lib/r10k/.ssh': }" }
-    let :params do
-      default_params.merge(owner: 'r42k', group: 'r43k', mode: '0777')
-    end
-
-    it_behaves_like 'r10k::authorized_key shared example'
-  end
-
-  context 'with special destination' do
-    let :params do
-      default_params.merge(destination: '/tmp/desti')
-    end
-
-    it {
-      is_expected.to contain_file('/tmp/desti')
-        .with_owner(params[:owner])
-        .with_group(params[:group])
-        .with_mode(params[:mode])
-    }
   end
 end
