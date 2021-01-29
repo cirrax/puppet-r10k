@@ -37,7 +37,7 @@ class{'r10k::gitolite_hooks':}
 ~~~
 
 ## Reference
-Find documentation about possible parameters on top of each manifest.
+Find documentation about possible parameters on top of each manifest or have a look at REFERENCE.md.
 
 ### classes
 
@@ -54,7 +54,7 @@ This class creates an r10k user with ssh keys etc.
 Class to install hooks on a gitolite server
 to trigger r10k updates.
 
-Adaptions to other git servers are verry welcome.
+Adaptions to other git servers are very welcome.
 
 #### r10k::ssh_key
 Generate an SSH authentication key for r10k to

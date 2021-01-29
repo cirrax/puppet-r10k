@@ -2,27 +2,26 @@
 # this class installs hooks on a gitolite server
 # to trigger r10k updates
 #
-# Parameters:
-# $hook_path:
-#   path where to install the hooks
-#   defaults to: '/var/lib/gitolite/scripts'
-# $hook_name:
-#   filename of the update hook script
-# $multihook_name:
-#   filename of the mutlihook script
-#   set to '' if you do not want to install
-#   defaults to: '/var/lib/gitolite/scripts/multihook_r10k_email'
-# $multihook_scripts:
-#   Array of scripts installed in $hook_path to
-#   execute with multihook.
-#   defaults to []
-#   $hook_name is added by default.
-# $gitolite_user:
-#   gitolite user to be owner of the scripts
-#   defaults to 'gitolite'
-# $packages:
-#   additional packages needed for the hooks
-#   defaults to ['moreutils'] which contains pee needed for multihook
+# @param hook_path
+#  path where to install the hooks
+#  defaults to: '/var/lib/gitolite/scripts'
+# @param hook_name
+#  filename of the update hook script
+# @param multihook_name
+#  filename of the mutlihook script
+#  set to '' if you do not want to install
+#  defaults to: '/var/lib/gitolite/scripts/multihook_r10k_email'
+# @param multihook_scripts
+#  Array of scripts installed in $hook_path to
+#  execute with multihook.
+#  defaults to []
+#  $hook_name is added by default.
+# @param gitolite_user
+#  gitolite user to be owner of the scripts
+#  defaults to 'gitolite'
+# @param packages
+#  additional packages needed for the hooks
+#  defaults to ['moreutils'] which contains pee needed for multihook
 #
 class r10k::gitolite_hooks (
   String $hook_path         = '/var/lib/gitolite/scripts',

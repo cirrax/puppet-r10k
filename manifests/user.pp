@@ -2,14 +2,13 @@
 # this class creates an r10k user
 # with ssh key etc.
 #
-# Parameters:
-# $user:
-#   the r10k user, defaults to 'r10k'
-# $home:
-#   the home directory of $user
-# $allowed_keys:
-#   Array of ssh keys allowed to execute r10k updates
-#   normaly this is the key used by git hooks.
+# @param user
+#  the r10k user, defaults to 'r10k'
+# @param home
+#  the home directory of $user
+# @param allowed_keys
+#  Array of ssh keys allowed to execute r10k updates
+#  normaly this is the key used by git hooks.
 #
 class r10k::user (
   String $user         = 'r10k',

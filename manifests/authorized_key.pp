@@ -1,23 +1,27 @@
 #
 # Define an authorized key on the server
 #
-# Parameters:
-#   $username:
-#     the username to put the file for
-#   $home:
-#     the users homedirectory
-#   $keys
-#     an array of keys to concat
-#   $destination
-#     use this if you want to set a different destination than
-#     '~/.ssh/authorized_keys'
-#   $command
-#     command to allow
-#     defaults to '/var/lib/r10k/update_environment.sh'
-#   $options
-#     defaults to: [no-port-forwarding,no-X11-forwarding,no-agent-forwarding,no-pty]
+# @param username
+#   the username to put the file for
+# @param home
+#   the users homedirectory
+# @param keys
+#   an array of keys to concat
+# @param destination
+#   use this if you want to set a different destination than
+#   '~/.ssh/authorized_keys'
+# @param owner
+#   owner for the authorized_keys file
+# @param group
+#   group for the authorized_keys file
+# @param mode
+#   mode for the authorized_keys file
+# @param command
+#   command to allow
+#   defaults to '/var/lib/r10k/update_environment.sh'
+# @param options
+#   defaults to: [no-port-forwarding,no-X11-forwarding,no-agent-forwarding,no-pty]
 #
-
 class r10k::authorized_key (
   $username,
   $home,
