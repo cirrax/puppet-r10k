@@ -14,15 +14,26 @@
 
 ## Classes
 
-### `r10k`
+### <a name="r10k"></a>`r10k`
 
 Main r10k class
 
 #### Parameters
 
-The following parameters are available in the `r10k` class.
+The following parameters are available in the `r10k` class:
 
-##### `configdir`
+* [`configdir`](#configdir)
+* [`cachedir`](#cachedir)
+* [`proxy`](#proxy)
+* [`sources`](#sources)
+* [`git`](#git)
+* [`forge`](#forge)
+* [`user`](#user)
+* [`home`](#home)
+* [`ensure_user`](#ensure_user)
+* [`allowed_keys`](#allowed_keys)
+
+##### <a name="configdir"></a>`configdir`
 
 Data type: `String`
 
@@ -31,7 +42,7 @@ defaults to '/etc/puppet'
 
 Default value: `'/etc/puppet'`
 
-##### `cachedir`
+##### <a name="cachedir"></a>`cachedir`
 
 Data type: `String`
 
@@ -42,7 +53,7 @@ be updated.
 
 Default value: `''`
 
-##### `proxy`
+##### <a name="proxy"></a>`proxy`
 
 Data type: `String`
 
@@ -52,7 +63,7 @@ as well as any Git operations performed against an HTTP/HTTPS remote.
 
 Default value: `''`
 
-##### `sources`
+##### <a name="sources"></a>`sources`
 
 Data type: `Hash`
 
@@ -65,7 +76,7 @@ Example (hiera):
 
 Default value: `{}`
 
-##### `git`
+##### <a name="git"></a>`git`
 
 Data type: `Hash`
 
@@ -74,7 +85,7 @@ See r10k.yaml file for possible options (section git)
 
 Default value: `{}`
 
-##### `forge`
+##### <a name="forge"></a>`forge`
 
 Data type: `Hash`
 
@@ -83,7 +94,7 @@ See r10k.yaml file for possible options (section forge)
 
 Default value: `{}`
 
-##### `user`
+##### <a name="user"></a>`user`
 
 Data type: `String`
 
@@ -91,7 +102,7 @@ the r10k user, defaults to 'r10k'
 
 Default value: `'r10k'`
 
-##### `home`
+##### <a name="home"></a>`home`
 
 Data type: `String`
 
@@ -99,7 +110,7 @@ the home directory of $user
 
 Default value: `'/var/lib/r10k'`
 
-##### `ensure_user`
+##### <a name="ensure_user"></a>`ensure_user`
 
 Data type: `Boolean`
 
@@ -109,7 +120,7 @@ defaults to true
 
 Default value: ``true``
 
-##### `allowed_keys`
+##### <a name="allowed_keys"></a>`allowed_keys`
 
 Data type: `Array`
 
@@ -118,27 +129,37 @@ normaly this is the key used by git hooks.
 
 Default value: `[]`
 
-### `r10k::authorized_key`
+### <a name="r10kauthorized_key"></a>`r10k::authorized_key`
 
 Define an authorized key on the server
 
 #### Parameters
 
-The following parameters are available in the `r10k::authorized_key` class.
+The following parameters are available in the `r10k::authorized_key` class:
 
-##### `username`
+* [`username`](#username)
+* [`home`](#home)
+* [`keys`](#keys)
+* [`destination`](#destination)
+* [`owner`](#owner)
+* [`group`](#group)
+* [`mode`](#mode)
+* [`command`](#command)
+* [`options`](#options)
+
+##### <a name="username"></a>`username`
 
 Data type: `Any`
 
 the username to put the file for
 
-##### `home`
+##### <a name="home"></a>`home`
 
 Data type: `Any`
 
 the users homedirectory
 
-##### `keys`
+##### <a name="keys"></a>`keys`
 
 Data type: `Any`
 
@@ -146,7 +167,7 @@ an array of keys to concat
 
 Default value: `[]`
 
-##### `destination`
+##### <a name="destination"></a>`destination`
 
 Data type: `Any`
 
@@ -155,7 +176,7 @@ use this if you want to set a different destination than
 
 Default value: `''`
 
-##### `owner`
+##### <a name="owner"></a>`owner`
 
 Data type: `Any`
 
@@ -163,7 +184,7 @@ owner for the authorized_keys file
 
 Default value: `$username`
 
-##### `group`
+##### <a name="group"></a>`group`
 
 Data type: `Any`
 
@@ -171,7 +192,7 @@ group for the authorized_keys file
 
 Default value: `$username`
 
-##### `mode`
+##### <a name="mode"></a>`mode`
 
 Data type: `Any`
 
@@ -179,7 +200,7 @@ mode for the authorized_keys file
 
 Default value: `'0644'`
 
-##### `command`
+##### <a name="command"></a>`command`
 
 Data type: `Any`
 
@@ -188,7 +209,7 @@ defaults to '/var/lib/r10k/update_environment.sh'
 
 Default value: `'/var/lib/r10k/update_environment.sh'`
 
-##### `options`
+##### <a name="options"></a>`options`
 
 Data type: `Any`
 
@@ -196,16 +217,23 @@ defaults to: [no-port-forwarding,no-X11-forwarding,no-agent-forwarding,no-pty]
 
 Default value: `['no-port-forwarding','no-X11-forwarding','no-agent-forwarding','no-pty']`
 
-### `r10k::gitolite_hooks`
+### <a name="r10kgitolite_hooks"></a>`r10k::gitolite_hooks`
 
 this class installs hooks on a gitolite server
 to trigger r10k updates
 
 #### Parameters
 
-The following parameters are available in the `r10k::gitolite_hooks` class.
+The following parameters are available in the `r10k::gitolite_hooks` class:
 
-##### `hook_path`
+* [`hook_path`](#hook_path)
+* [`hook_name`](#hook_name)
+* [`multihook_name`](#multihook_name)
+* [`multihook_scripts`](#multihook_scripts)
+* [`gitolite_user`](#gitolite_user)
+* [`packages`](#packages)
+
+##### <a name="hook_path"></a>`hook_path`
 
 Data type: `String`
 
@@ -214,7 +242,7 @@ defaults to: '/var/lib/gitolite/scripts'
 
 Default value: `'/var/lib/gitolite/scripts'`
 
-##### `hook_name`
+##### <a name="hook_name"></a>`hook_name`
 
 Data type: `String`
 
@@ -222,7 +250,7 @@ filename of the update hook script
 
 Default value: `'update-r10k-branch'`
 
-##### `multihook_name`
+##### <a name="multihook_name"></a>`multihook_name`
 
 Data type: `String`
 
@@ -232,7 +260,7 @@ defaults to: '/var/lib/gitolite/scripts/multihook_r10k_email'
 
 Default value: `'multihook_r10k_email'`
 
-##### `multihook_scripts`
+##### <a name="multihook_scripts"></a>`multihook_scripts`
 
 Data type: `Array`
 
@@ -243,7 +271,7 @@ $hook_name is added by default.
 
 Default value: `[]`
 
-##### `gitolite_user`
+##### <a name="gitolite_user"></a>`gitolite_user`
 
 Data type: `String`
 
@@ -252,7 +280,7 @@ defaults to 'gitolite'
 
 Default value: `'gitolite'`
 
-##### `packages`
+##### <a name="packages"></a>`packages`
 
 Data type: `Array`
 
@@ -261,7 +289,7 @@ defaults to ['moreutils'] which contains pee needed for multihook
 
 Default value: `['moreutils']`
 
-### `r10k::ssh_key`
+### <a name="r10kssh_key"></a>`r10k::ssh_key`
 
 Generate an SSH authentication key
 
@@ -270,15 +298,22 @@ remote system.
 
 #### Parameters
 
-The following parameters are available in the `r10k::ssh_key` class.
+The following parameters are available in the `r10k::ssh_key` class:
 
-##### `filename`
+* [`filename`](#filename)
+* [`type`](#type)
+* [`length`](#length)
+* [`password`](#password)
+* [`comment`](#comment)
+* [`user`](#user)
+
+##### <a name="filename"></a>`filename`
 
 Data type: `String`
 
 Filename (full path) for the key. Required.
 
-##### `type`
+##### <a name="type"></a>`type`
 
 Data type: `String`
 
@@ -286,7 +321,7 @@ Type of key, either dsa, ecdsa or rsa. Defaults to rsa.
 
 Default value: `'rsa'`
 
-##### `length`
+##### <a name="length"></a>`length`
 
 Data type: `Integer`
 
@@ -295,7 +330,7 @@ regarding non RSA keys.
 
 Default value: `2048`
 
-##### `password`
+##### <a name="password"></a>`password`
 
 Data type: `String`
 
@@ -305,7 +340,7 @@ process parameters when creating the key.
 
 Default value: `''`
 
-##### `comment`
+##### <a name="comment"></a>`comment`
 
 Data type: `String`
 
@@ -313,7 +348,7 @@ Comment describing the Key. Defaults to "Automatic authentication key for $user 
 
 Default value: `'undef'`
 
-##### `user`
+##### <a name="user"></a>`user`
 
 Data type: `String`
 
@@ -322,16 +357,20 @@ containing the key. Defaults to "root"
 
 Default value: `'root'`
 
-### `r10k::user`
+### <a name="r10kuser"></a>`r10k::user`
 
 this class creates an r10k user
 with ssh key etc.
 
 #### Parameters
 
-The following parameters are available in the `r10k::user` class.
+The following parameters are available in the `r10k::user` class:
 
-##### `user`
+* [`user`](#user)
+* [`home`](#home)
+* [`allowed_keys`](#allowed_keys)
+
+##### <a name="user"></a>`user`
 
 Data type: `String`
 
@@ -339,7 +378,7 @@ the r10k user, defaults to 'r10k'
 
 Default value: `'r10k'`
 
-##### `home`
+##### <a name="home"></a>`home`
 
 Data type: `String`
 
@@ -347,7 +386,7 @@ the home directory of $user
 
 Default value: `'/var/lib/r10k'`
 
-##### `allowed_keys`
+##### <a name="allowed_keys"></a>`allowed_keys`
 
 Data type: `Array`
 
