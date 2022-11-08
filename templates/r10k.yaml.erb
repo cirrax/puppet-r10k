@@ -18,10 +18,19 @@ proxy: <%= @proxy %>
 pool_size: <%= @pool_size %>
 <% end -%>
 
+<% if @deploy %>
+# Top level setting for controlling how r10k deploys behave.
+# (see: https://github.com/puppetlabs/r10k/blob/main/doc/dynamic-environments/configuration.mkd#deploy)
+deploy:
+  <%- @deploy.each do |key, val| -%>
+  <%= key %>: <%= val %>
+  <%- end -%>
+<% end -%>
+
 <% if @sources -%>
 # The 'sources' setting determines what repositories r10k will use when creating
 # Puppet environments.
-# see (https://github.com/puppetlabs/r10k/blob/main/doc/dynamic-environments/configuration.mkd#source-options)
+# (see https://github.com/puppetlabs/r10k/blob/main/doc/dynamic-environments/configuration.mkd#source-options)
 sources:
 <% @sources.each do |key, val| -%>
   <%= key %>:

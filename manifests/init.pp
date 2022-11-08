@@ -16,8 +16,16 @@
 #   The 'proxy' setting configures an HTTP proxy to use for all HTTP/HTTPS
 #   operations performed by r10k. This includes requests to the Puppet Forge
 #   as well as any Git operations performed against an HTTP/HTTPS remote.
+#   @see https://github.com/puppetlabs/r10k/blob/main/doc/dynamic-environments/configuration.mkd#proxy
+# @param deploy
+#   Top level setting for controlling how r10k deploys behave.
+#   @see https://github.com/puppetlabs/r10k/blob/main/doc/dynamic-environments/configuration.mkd#deploy
+#   Example (hiera, yaml):
+#     r10k::deploy:
+#       generate_types: true
 # @param sources
 #   Hash of sources to use, defaults to {}
+#   @see https://github.com/puppetlabs/r10k/blob/main/doc/dynamic-environments/configuration.mkd#source-options
 #   Example (hiera):
 #     r10k::sources:
 #       main-puppet:
@@ -49,6 +57,7 @@ class r10k (
   Optional[Hash]      $sources      = undef,
   Optional[Hash]      $git          = undef,
   Optional[Hash]      $forge        = undef,
+  Optional[Hash]      $deploy       = undef,
   String              $user         = 'r10k',
   String              $home         = '/var/lib/r10k',
   Boolean             $ensure_user  = true,

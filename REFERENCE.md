@@ -26,6 +26,7 @@ The following parameters are available in the `r10k` class:
 * [`cachedir`](#cachedir)
 * [`pool_size`](#pool_size)
 * [`proxy`](#proxy)
+* [`deploy`](#deploy)
 * [`sources`](#sources)
 * [`git`](#git)
 * [`forge`](#forge)
@@ -70,6 +71,19 @@ Data type: `Optional[String[1]]`
 The 'proxy' setting configures an HTTP proxy to use for all HTTP/HTTPS
 operations performed by r10k. This includes requests to the Puppet Forge
 as well as any Git operations performed against an HTTP/HTTPS remote.
+@see https://github.com/puppetlabs/r10k/blob/main/doc/dynamic-environments/configuration.mkd#proxy
+
+Default value: ``undef``
+
+##### <a name="deploy"></a>`deploy`
+
+Data type: `Optional[Hash]`
+
+Top level setting for controlling how r10k deploys behave.
+@see https://github.com/puppetlabs/r10k/blob/main/doc/dynamic-environments/configuration.mkd#deploy
+Example (hiera, yaml):
+  r10k::deploy:
+    generate_types: true
 
 Default value: ``undef``
 
@@ -78,6 +92,7 @@ Default value: ``undef``
 Data type: `Optional[Hash]`
 
 Hash of sources to use, defaults to {}
+@see https://github.com/puppetlabs/r10k/blob/main/doc/dynamic-environments/configuration.mkd#source-options
 Example (hiera):
   r10k::sources:
     main-puppet:
