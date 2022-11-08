@@ -18,6 +18,7 @@ proxy: <%= @proxy %>
 pool_size: <%= @pool_size %>
 <% end -%>
 
+<% if @sources -%>
 # The 'sources' setting determines what repositories r10k will use when creating
 # Puppet environments.
 # see (https://github.com/puppetlabs/r10k/blob/main/doc/dynamic-environments/configuration.mkd#source-options)
@@ -28,17 +29,22 @@ sources:
     <%= k %>: <%= v %>
   <%- end -%>
 <% end -%>
+<% end -%>
 
+<% if @git -%>
 # git settings 
 # (see https://github.com/puppetlabs/r10k/blob/main/doc/dynamic-environments/configuration.mkd)
 git:
 <% @git.each do |key, val| -%>
     <%= key %>: <%= val %>
 <% end -%>
+<% end -%>
 
+<% if @forge -%>
 # Configuration options for downloading modules from the Puppet Forge
 # (see https://github.com/puppetlabs/r10k/blob/main/doc/dynamic-environments/configuration.mkd#forge)
 forge:
 <% @forge.each do |key, val| -%>
     <%= key %>: <%= val %>
+<% end -%>
 <% end -%>

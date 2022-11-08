@@ -24,6 +24,7 @@ The following parameters are available in the `r10k` class:
 
 * [`configdir`](#configdir)
 * [`cachedir`](#cachedir)
+* [`pool_size`](#pool_size)
 * [`proxy`](#proxy)
 * [`sources`](#sources)
 * [`git`](#git)
@@ -44,28 +45,37 @@ Default value: `'/etc/puppet'`
 
 ##### <a name="cachedir"></a>`cachedir`
 
-Data type: `String`
+Data type: `Optional[String[1]]`
 
 The 'cachedir' setting controls where cached content, such as mirrored Git
 repositories, are stored on the local machine. This location should be
 persistent, as environments and modules may rely on these files in order to
 be updated.
 
-Default value: `''`
+Default value: ``undef``
+
+##### <a name="pool_size"></a>`pool_size`
+
+Data type: `Optional[Integer]`
+
+The pool_size setting is a number to determine how many threads should
+be spawn while updating modules.
+
+Default value: ``undef``
 
 ##### <a name="proxy"></a>`proxy`
 
-Data type: `String`
+Data type: `Optional[String[1]]`
 
 The 'proxy' setting configures an HTTP proxy to use for all HTTP/HTTPS
 operations performed by r10k. This includes requests to the Puppet Forge
 as well as any Git operations performed against an HTTP/HTTPS remote.
 
-Default value: `''`
+Default value: ``undef``
 
 ##### <a name="sources"></a>`sources`
 
-Data type: `Hash`
+Data type: `Optional[Hash]`
 
 Hash of sources to use, defaults to {}
 Example (hiera):
@@ -74,25 +84,25 @@ Example (hiera):
       remote: 'git@somewhere:main-puppet'
       basedir: '/etc/puppet/environments'
 
-Default value: `{}`
+Default value: ``undef``
 
 ##### <a name="git"></a>`git`
 
-Data type: `Hash`
+Data type: `Optional[Hash]`
 
 Hash of git configurations, defaults to {}
 See r10k.yaml file for possible options (section git)
 
-Default value: `{}`
+Default value: ``undef``
 
 ##### <a name="forge"></a>`forge`
 
-Data type: `Hash`
+Data type: `Optional[Hash]`
 
 Hash of forge configurations, defaults to {}
 See r10k.yaml file for possible options (section forge)
 
-Default value: `{}`
+Default value: ``undef``
 
 ##### <a name="user"></a>`user`
 
@@ -149,19 +159,19 @@ The following parameters are available in the `r10k::authorized_key` class:
 
 ##### <a name="username"></a>`username`
 
-Data type: `Any`
+Data type: `String[1]`
 
 the username to put the file for
 
 ##### <a name="home"></a>`home`
 
-Data type: `Any`
+Data type: `String[1]`
 
 the users homedirectory
 
 ##### <a name="keys"></a>`keys`
 
-Data type: `Any`
+Data type: `Array`
 
 an array of keys to concat
 
@@ -169,16 +179,16 @@ Default value: `[]`
 
 ##### <a name="destination"></a>`destination`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 use this if you want to set a different destination than
 '~/.ssh/authorized_keys'
 
-Default value: `''`
+Default value: ``undef``
 
 ##### <a name="owner"></a>`owner`
 
-Data type: `Any`
+Data type: `String[1]`
 
 owner for the authorized_keys file
 
@@ -186,7 +196,7 @@ Default value: `$username`
 
 ##### <a name="group"></a>`group`
 
-Data type: `Any`
+Data type: `String[1]`
 
 group for the authorized_keys file
 
@@ -194,7 +204,7 @@ Default value: `$username`
 
 ##### <a name="mode"></a>`mode`
 
-Data type: `Any`
+Data type: `String[1]`
 
 mode for the authorized_keys file
 
@@ -202,7 +212,7 @@ Default value: `'0644'`
 
 ##### <a name="command"></a>`command`
 
-Data type: `Any`
+Data type: `String[1]`
 
 command to allow
 defaults to '/var/lib/r10k/update_environment.sh'
@@ -211,7 +221,7 @@ Default value: `'/var/lib/r10k/update_environment.sh'`
 
 ##### <a name="options"></a>`options`
 
-Data type: `Any`
+Data type: `Array`
 
 defaults to: [no-port-forwarding,no-X11-forwarding,no-agent-forwarding,no-pty]
 
