@@ -23,32 +23,32 @@
 #   defaults to: [no-port-forwarding,no-X11-forwarding,no-agent-forwarding,no-pty]
 #
 class r10k::authorized_key (
-  $username,
-  $home,
-  $keys        = [],
-  $destination = '',
-  $owner       = $username,
-  $group       = $username,
-  $mode        = '0644',
-  $command     = '/var/lib/r10k/update_environment.sh',
-  $options     = ['no-port-forwarding','no-X11-forwarding','no-agent-forwarding','no-pty']
+  String[1]           $username,
+  String[1]           $home,
+  Array               $keys        = [],
+  Optional[String[1]] $destination = undef,
+  String[1]           $owner       = $username,
+  String[1]           $group       = $username,
+  String[1]           $mode        = '0644',
+  String[1]           $command     = '/var/lib/r10k/update_environment.sh',
+  Array               $options     = ['no-port-forwarding','no-X11-forwarding','no-agent-forwarding','no-pty']
 ) {
   $_keys = prefix(prefix($keys,' '), join(["command=\"${command}\"", join($options,',')],','))
 
-  if $destination == '' {
+  if $destination {
+    file { $destination:
+      owner   => $owner,
+      group   => $group,
+      mode    => $mode,
+      content => join($_keys, "\n"),
+    }
+  } else {
     file { "${home}/.ssh/authorized_keys":
       owner   => $owner,
       group   => $group,
       mode    => $mode,
       content => join($_keys, "\n"),
       require => File["${home}/.ssh"],
-    }
-  } else {
-    file { $destination:
-      owner   => $owner,
-      group   => $group,
-      mode    => $mode,
-      content => join($_keys, "\n"),
     }
   }
 }

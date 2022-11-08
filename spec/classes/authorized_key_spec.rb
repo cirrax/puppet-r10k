@@ -6,7 +6,6 @@ describe 'r10k::authorized_key' do
     { username: 'r10k',
       home: '/var/lib/r10k',
       keys: [],
-      destination: '',
       owner: 'r10k',
       group: 'r10k',
       mode: '0644',
