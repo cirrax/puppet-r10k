@@ -9,6 +9,9 @@
 #   repositories, are stored on the local machine. This location should be
 #   persistent, as environments and modules may rely on these files in order to
 #   be updated.
+# @param pool_size
+#   The pool_size setting is a number to determine how many threads should 
+#   be spawn while updating modules.
 # @param proxy
 #   The 'proxy' setting configures an HTTP proxy to use for all HTTP/HTTPS
 #   operations performed by r10k. This includes requests to the Puppet Forge
@@ -41,6 +44,7 @@
 class r10k (
   String  $configdir    = '/etc/puppet',
   String  $cachedir     = '',
+  Optional[Integer] $pool_size = undef,
   String  $proxy        = '',
   Hash    $sources      = {},
   Hash    $git          = {},

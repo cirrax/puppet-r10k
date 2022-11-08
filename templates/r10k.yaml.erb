@@ -26,6 +26,10 @@ cacheddir: <%= @cachedir %>
 proxy: <%= @proxy %>
 <% end -%>
 
+<% if @pool_size -%>
+pool_size: <%= @pool_size %>
+<% end -%>
+
 # The 'sources' setting determines what repositories r10k will use when creating
 # Puppet environments.
 sources:
