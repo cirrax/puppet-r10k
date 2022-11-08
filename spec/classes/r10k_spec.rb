@@ -5,8 +5,6 @@ describe 'r10k' do
   let :default_params do
     {
       configdir: '/etc/puppet',
-      cachedir: '',
-      proxy: '',
       sources: {},
       git: {},
       forge: {},

@@ -11,7 +11,7 @@
 #
 # The default value is "~/.r10k"
 #cachedir: '/var/cache/r10k'
-<% if @cachedir != '' -%>
+<% if @cachedir -%>
 cacheddir: <%= @cachedir %>
 <% end -%>
 
@@ -22,7 +22,7 @@ cacheddir: <%= @cachedir %>
 # using settings below. Authenticated proxies can be configured by providing
 # credentials in the URL, e.g. 'https://username:password@proxy.example.com:8888'
 #proxy: 'https://proxy.example.com:8888'
-<% if @proxy != '' -%>
+<% if @proxy -%>
 proxy: <%= @proxy %>
 <% end -%>
 

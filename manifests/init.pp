@@ -42,17 +42,17 @@
 #   normaly this is the key used by git hooks.
 #
 class r10k (
-  String  $configdir    = '/etc/puppet',
-  String  $cachedir     = '',
-  Optional[Integer] $pool_size = undef,
-  String  $proxy        = '',
-  Hash    $sources      = {},
-  Hash    $git          = {},
-  Hash    $forge        = {},
-  String  $user         = 'r10k',
-  String  $home         = '/var/lib/r10k',
-  Boolean $ensure_user  = true,
-  Array   $allowed_keys = [],
+  String              $configdir    = '/etc/puppet',
+  Optional[String[1]] $cachedir     = undef,
+  Optional[Integer]   $pool_size    = undef,
+  Optional[String[1]] $proxy        = undef,
+  Hash                $sources      = {},
+  Hash                $git          = {},
+  Hash                $forge        = {},
+  String              $user         = 'r10k',
+  String              $home         = '/var/lib/r10k',
+  Boolean             $ensure_user  = true,
+  Array               $allowed_keys = [],
 ) {
   if $ensure_user {
     class { 'r10k::user':
