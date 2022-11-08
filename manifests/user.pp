@@ -14,9 +14,8 @@ class r10k::user (
   String $user         = 'r10k',
   String $home         = '/var/lib/r10k',
   Array  $allowed_keys = [],
-){
-
-  user{ $user:
+) {
+  user { $user:
     ensure     => 'present',
     system     => true,
     comment    => "${user} user",
@@ -34,7 +33,7 @@ class r10k::user (
   }
 
   #SSH Key to fetch data from git
-  class {'::r10k::ssh_key':
+  class { 'r10k::ssh_key':
     filename => "${home}/.ssh/id_ed25519",
     type     => 'ed25519',
     user     => $user,
@@ -42,7 +41,7 @@ class r10k::user (
   }
 
   #keys which are allowed to login:
-  class {'::r10k::authorized_key':
+  class { 'r10k::authorized_key':
     username => $user,
     keys     => $allowed_keys,
     home     => $home,

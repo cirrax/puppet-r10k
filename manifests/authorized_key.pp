@@ -33,7 +33,6 @@ class r10k::authorized_key (
   $command     = '/var/lib/r10k/update_environment.sh',
   $options     = ['no-port-forwarding','no-X11-forwarding','no-agent-forwarding','no-pty']
 ) {
-
   $_keys = prefix(prefix($keys,' '), join(["command=\"${command}\"", join($options,',')],','))
 
   if $destination == '' {

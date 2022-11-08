@@ -49,10 +49,9 @@ class r10k (
   String  $home         = '/var/lib/r10k',
   Boolean $ensure_user  = true,
   Array   $allowed_keys = [],
-){
-
+) {
   if $ensure_user {
-    class {'::r10k::user':
+    class { 'r10k::user':
       user         => $user,
       home         => $home,
       allowed_keys => $allowed_keys,
@@ -71,14 +70,14 @@ class r10k (
   }
 
   # scipts to execute to update environments (usally through hook)
-  file {"${home}/update_environment.sh":
+  file { "${home}/update_environment.sh":
     owner   => $user,
     group   => $user,
     mode    => '0755',
     content => template('r10k/update_environment.sh.erb'),
   }
 
-  file {"${home}/update_module.sh":
+  file { "${home}/update_module.sh":
     owner   => $user,
     group   => $user,
     mode    => '0755',

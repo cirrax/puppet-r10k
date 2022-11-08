@@ -30,8 +30,7 @@ class r10k::gitolite_hooks (
   Array  $multihook_scripts = [],
   String $gitolite_user     = 'gitolite',
   Array  $packages          = ['moreutils'],
-){
-
+) {
   ensure_packages($packages)
 
   if $hook_name != '' {
