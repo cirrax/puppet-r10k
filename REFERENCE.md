@@ -34,6 +34,8 @@ The following parameters are available in the `r10k` class:
 * [`home`](#home)
 * [`ensure_user`](#ensure_user)
 * [`allowed_keys`](#allowed_keys)
+* [`packages`](#packages)
+* [`package_ensure`](#package_ensure)
 
 ##### <a name="configdir"></a>`configdir`
 
@@ -153,6 +155,22 @@ Array of ssh keys allowed to execute r10k updates
 normaly this is the key used by git hooks.
 
 Default value: `[]`
+
+##### <a name="packages"></a>`packages`
+
+Data type: `Array`
+
+packages to install
+
+Default value: `['r10k']`
+
+##### <a name="package_ensure"></a>`package_ensure`
+
+Data type: `String[1]`
+
+what to ensure for packages
+
+Default value: `'installed'`
 
 ### <a name="r10kauthorized_key"></a>`r10k::authorized_key`
 

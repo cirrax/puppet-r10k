@@ -48,20 +48,26 @@
 # @param allowed_keys
 #   Array of ssh keys allowed to execute r10k updates
 #   normaly this is the key used by git hooks.
+# @param packages
+#   packages to install
+# @param package_ensure
+#   what to ensure for packages
 #
 class r10k (
-  String              $configdir    = '/etc/puppet',
-  Optional[String[1]] $cachedir     = undef,
-  Optional[Integer]   $pool_size    = undef,
-  Optional[String[1]] $proxy        = undef,
-  Optional[Hash]      $sources      = undef,
-  Optional[Hash]      $git          = undef,
-  Optional[Hash]      $forge        = undef,
-  Optional[Hash]      $deploy       = undef,
-  String              $user         = 'r10k',
-  String              $home         = '/var/lib/r10k',
-  Boolean             $ensure_user  = true,
-  Array               $allowed_keys = [],
+  String              $configdir      = '/etc/puppet',
+  Optional[String[1]] $cachedir       = undef,
+  Optional[Integer]   $pool_size      = undef,
+  Optional[String[1]] $proxy          = undef,
+  Optional[Hash]      $sources        = undef,
+  Optional[Hash]      $git            = undef,
+  Optional[Hash]      $forge          = undef,
+  Optional[Hash]      $deploy         = undef,
+  String              $user           = 'r10k',
+  String              $home           = '/var/lib/r10k',
+  Boolean             $ensure_user    = true,
+  Array               $allowed_keys   = [],
+  Array               $packages       = ['r10k'],
+  String[1]           $package_ensure = 'installed',
 ) {
   if $ensure_user {
     class { 'r10k::user':
@@ -71,8 +77,8 @@ class r10k (
     }
   }
 
-  package { 'r10k':
-    ensure => 'installed',
+  package { $packages:
+    ensure => $package_ensure,
   }
 
   file { "${configdir}/r10k.yaml":
