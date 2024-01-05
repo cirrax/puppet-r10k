@@ -52,22 +52,29 @@
 #   packages to install
 # @param package_ensure
 #   what to ensure for packages
+# @param package_options
+#   options to set for the package option used to
+#   install $packages.
+#   eg. this lets you install r10k from gem by
+#   setting this to:
+#   { 'provider' => 'gem' }
 #
 class r10k (
-  String              $configdir      = '/etc/puppet',
-  Optional[String[1]] $cachedir       = undef,
-  Optional[Integer]   $pool_size      = undef,
-  Optional[String[1]] $proxy          = undef,
-  Optional[Hash]      $sources        = undef,
-  Optional[Hash]      $git            = undef,
-  Optional[Hash]      $forge          = undef,
-  Optional[Hash]      $deploy         = undef,
-  String              $user           = 'r10k',
-  String              $home           = '/var/lib/r10k',
-  Boolean             $ensure_user    = true,
-  Array               $allowed_keys   = [],
-  Array               $packages       = ['r10k'],
-  String[1]           $package_ensure = 'installed',
+  String                    $configdir       = '/etc/puppet',
+  Optional[String[1]]       $cachedir        = undef,
+  Optional[Integer]         $pool_size       = undef,
+  Optional[String[1]]       $proxy           = undef,
+  Optional[Hash]            $sources         = undef,
+  Optional[Hash]            $git             = undef,
+  Optional[Hash]            $forge           = undef,
+  Optional[Hash]            $deploy          = undef,
+  String                    $user            = 'r10k',
+  String                    $home            = '/var/lib/r10k',
+  Boolean                   $ensure_user     = true,
+  Array                     $allowed_keys    = [],
+  Array                     $packages        = ['r10k'],
+  String[1]                 $package_ensure  = 'installed',
+  Hash[String[1],String[1]] $package_options = {},
 ) {
   if $ensure_user {
     class { 'r10k::user':
@@ -77,9 +84,7 @@ class r10k (
     }
   }
 
-  package { $packages:
-    ensure => $package_ensure,
-  }
+  ensure_packages($packages, { 'ensure' => $package_ensure } + $package_options)
 
   file { "${configdir}/r10k.yaml":
     owner   => 'root',

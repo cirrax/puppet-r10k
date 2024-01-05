@@ -77,6 +77,20 @@ describe 'r10k' do
         it_behaves_like 'r10k user'
       end
 
+      context 'with package_options' do
+        let :params do
+          default_params.merge(
+            package_options: { 'provider' => 'gem' },
+          )
+        end
+
+        it_behaves_like 'r10k shared examples'
+        it {
+          is_expected.to contain_package('r10k')
+            .with_provider('gem')
+        }
+      end
+
       context 'with non default user' do
         let :params do
           default_params.merge(
