@@ -58,23 +58,28 @@
 #   eg. this lets you install r10k from gem by
 #   setting this to:
 #   { 'provider' => 'gem' }
+# @param r10k_command
+#   r10k command, if it is not saved in path, 
+#   you can specify the command with the path
 #
 class r10k (
-  String                    $configdir       = '/etc/puppet',
-  Optional[String[1]]       $cachedir        = undef,
-  Optional[Integer]         $pool_size       = undef,
-  Optional[String[1]]       $proxy           = undef,
-  Optional[Hash]            $sources         = undef,
-  Optional[Hash]            $git             = undef,
-  Optional[Hash]            $forge           = undef,
-  Optional[Hash]            $deploy          = undef,
-  String                    $user            = 'r10k',
-  String                    $home            = '/var/lib/r10k',
-  Boolean                   $ensure_user     = true,
-  Array                     $allowed_keys    = [],
-  Array                     $packages        = ['r10k'],
-  String[1]                 $package_ensure  = 'installed',
-  Hash[String[1],String[1]] $package_options = {},
+  String                    $configdir        = '/etc/puppet',
+  Boolean                   $ensure_configdir = false,
+  Optional[String[1]]       $cachedir         = undef,
+  Optional[Integer]         $pool_size        = undef,
+  Optional[String[1]]       $proxy            = undef,
+  Optional[Hash]            $sources          = undef,
+  Optional[Hash]            $git              = undef,
+  Optional[Hash]            $forge            = undef,
+  Optional[Hash]            $deploy           = undef,
+  String                    $user             = 'r10k',
+  String                    $home             = '/var/lib/r10k',
+  Boolean                   $ensure_user      = true,
+  Array                     $allowed_keys     = [],
+  Array                     $packages         = ['r10k'],
+  String[1]                 $package_ensure   = 'installed',
+  Hash[String[1],String[1]] $package_options  = {},
+  String[1]                 $r10k_command     = 'r10k',
 ) {
   if $ensure_user {
     class { 'r10k::user':
