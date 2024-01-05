@@ -4,6 +4,8 @@
 # @param configdir
 #   where the configfile should be put
 #   defaults to '/etc/puppet'
+# @param ensure_configdir
+#   set this to true to ensure the config direcory exists
 # @param cachedir
 #   The 'cachedir' setting controls where cached content, such as mirrored Git
 #   repositories, are stored on the local machine. This location should be
@@ -86,6 +88,12 @@ class r10k (
       user         => $user,
       home         => $home,
       allowed_keys => $allowed_keys,
+    }
+  }
+
+  if $ensure_configdir {
+    file { $configdir:
+      ensure => 'directory',
     }
   }
 
