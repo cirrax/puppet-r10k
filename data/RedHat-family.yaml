@@ -1,0 +1,13 @@
+---
+# r10k setting for RedHat os family
+
+# there are no packages available, so we install from gem
+
+r10k::package_options:
+  provider: 'gem'
+
+r10k::configdir: '/etc/puppetlabs/r10k'
+r10k::home: '/etc/puppetlabs/r10k'
+
+# since /usr/local/bin is not in path
+r10k::r10k_command: '/usr/local/bin/r10k'

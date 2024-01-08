@@ -64,6 +64,9 @@ fetch git repositories.
 
 none
 
+## Remarks
+if you install r10k with the gem provider (default for RedHat family) 
+you need to ensure that you have ruby-devel (or ruby-dev) package installed.
 
 ## Contributing
 

@@ -19,7 +19,7 @@ if [[ "$ENV" == 'MODULE' ]]; then
       echo "$ENV2 not allowed, only [A-Za-z0-9_]+ allowed as module"
       exit 1
    fi
-   (cd <%= @configdir %>; r10k --config=r10k.yaml deploy --verbose=debug module $ENV2 2>&1 |grep -E '(ERROR|INFO|Updating)')
+   (cd <%= @configdir %>; <%= @r10k_command %> --config=r10k.yaml deploy --verbose=debug module $ENV2 2>&1 |grep -E '(ERROR|INFO|Updating)')
 else
    if [[ ! ( "$ENV2" == '' || "$ENV2" == '--puppetfile' ) ]]; then
       echo "only --puppetfile allowed as second argument"
@@ -28,5 +28,5 @@ else
    if [[ $ENV == 'all' ]]; then
       ENV=''
    fi
-   (cd <%= @configdir %>; r10k --config=r10k.yaml deploy --verbose=debug environment $ENV $ENV2 2>&1 |grep -E '(ERROR|INFO|Updating)')
+   (cd <%= @configdir %>; <%= @r10k_command %> --config=r10k.yaml deploy --verbose=debug environment $ENV $ENV2 2>&1 |grep -E '(ERROR|INFO|Updating)')
 fi
