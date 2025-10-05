@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 require 'spec_helper'
 
@@ -10,19 +11,20 @@ describe 'r10k::authorized_key' do
       group: 'r10k',
       mode: '0644',
       command: '/var/lib/r10k/update_environment.sh',
-      options: ['no-port-forwarding', 'no-X11-forwarding', 'no-agent-forwarding', 'no-pty'] }
+      options: %w[no-port-forwarding no-X11-forwarding no-agent-forwarding no-pty] }
   end
 
   shared_examples 'r10k::authorized_key shared example' do
     it { is_expected.to compile.with_all_deps }
 
     it {
-      is_expected.to contain_file(params[:home] + '/.ssh/authorized_keys')
+      is_expected.to contain_file("#{params[:home]}/.ssh/authorized_keys")
         .with_owner(params[:owner])
         .with_group(params[:group])
         .with_mode(params[:mode])
     }
   end
+
   on_supported_os.each do |os, os_facts|
     context "on #{os}" do
       let(:facts) { os_facts }

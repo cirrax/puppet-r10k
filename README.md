@@ -23,8 +23,8 @@ class{'r10k':}
 ~~~
 
 If you want to use the gitolite hook to automatically
-update the puppet environments on new commits, invoke 
-the r10k::gitolite_hooks class on the git server and make 
+update the puppet environments on new commits, invoke
+the r10k::gitolite_hooks class on the git server and make
 the authorize the gitolite ssh key to run the r10k scripts.
 
 ~~~
@@ -60,7 +60,7 @@ fetch git repositories.
 none
 
 ## Remarks
-if you install r10k with the gem provider (default for RedHat family) 
+if you install r10k with the gem provider (default for RedHat family)
 you need to ensure that you have ruby-devel (or ruby-dev) package installed.
 
 ## Contributing

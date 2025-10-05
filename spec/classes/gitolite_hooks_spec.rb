@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 require 'spec_helper'
 
@@ -16,6 +17,7 @@ describe 'r10k::gitolite_hooks' do
   shared_examples 'r10k::gitolite_hooks shared examples' do
     it { is_expected.to compile.with_all_deps }
   end
+
   on_supported_os.each do |os, os_facts|
     context "on #{os}" do
       let(:facts) { os_facts }

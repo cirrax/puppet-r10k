@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 require 'spec_helper'
 
@@ -24,21 +25,21 @@ describe 'r10k' do
     }
 
     it {
-      is_expected.to contain_file(params[:configdir] + '/r10k.yaml')
+      is_expected.to contain_file("#{params[:configdir]}/r10k.yaml")
         .with_owner('root')
         .with_group('root')
         .with_mode('0644')
     }
 
     it {
-      is_expected.to contain_file(params[:home] + '/update_environment.sh')
+      is_expected.to contain_file("#{params[:home]}/update_environment.sh")
         .with_owner(params[:user])
         .with_group(params[:user])
         .with_mode('0755')
     }
 
     it {
-      is_expected.to contain_file(params[:home] + '/update_module.sh')
+      is_expected.to contain_file("#{params[:home]}/update_module.sh")
         .with_owner(params[:user])
         .with_group(params[:user])
         .with_mode('0755')
@@ -69,7 +70,7 @@ describe 'r10k' do
       context 'with non default configdir' do
         let :params do
           default_params.merge(
-            configdir: '/somewhere_else',
+            configdir: '/somewhere_else'
           )
         end
 
@@ -80,7 +81,7 @@ describe 'r10k' do
       context 'with package_options' do
         let :params do
           default_params.merge(
-            package_options: { 'provider' => 'gem' },
+            package_options: { 'provider' => 'gem' }
           )
         end
 
@@ -96,7 +97,7 @@ describe 'r10k' do
           default_params.merge(
             user: 'r42k',
             home: '/somewhere',
-            allowed_keys: ['key'],
+            allowed_keys: ['key']
           )
         end
 
@@ -107,7 +108,7 @@ describe 'r10k' do
       context 'with ensure_user false' do
         let :params do
           default_params.merge(
-            ensure_user: false,
+            ensure_user: false
           )
         end
 

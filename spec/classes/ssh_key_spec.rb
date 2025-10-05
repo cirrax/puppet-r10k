@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 require 'spec_helper'
 
@@ -43,7 +44,7 @@ describe 'r10k::ssh_key' do
             length: 4000,
             password: 'password',
             comment: 'somecomment',
-            user: 'r10k',
+            user: 'r10k'
           )
         end
 
