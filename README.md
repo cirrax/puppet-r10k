@@ -1,10 +1,5 @@
 # r10k puppet module
 
-[![Build Status](https://travis-ci.org/cirrax/puppet-r10k.svg?branch=master)](https://travis-ci.org/cirrax/puppet-r10k)
-[![Puppet Forge](https://img.shields.io/puppetforge/v/cirrax/r10k.svg?style=flat-square)](https://forge.puppetlabs.com/cirrax/r10k)
-[![Puppet Forge](https://img.shields.io/puppetforge/dt/cirrax/r10k.svg?style=flat-square)](https://forge.puppet.com/cirrax/r10k)
-[![Puppet Forge](https://img.shields.io/puppetforge/e/cirrax/r10k.svg?style=flat-square)](https://forge.puppet.com/cirrax/r10k)
-[![Puppet Forge](https://img.shields.io/puppetforge/f/cirrax/r10k.svg?style=flat-square)](https://forge.puppet.com/cirrax/r10k)
 
 #### Table of Contents
 

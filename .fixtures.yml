@@ -2,5 +2,3 @@
 fixtures:
   forge_modules:
     stdlib: puppetlabs/stdlib
-  symlinks:
-    r10k: "#{source_dir}"
